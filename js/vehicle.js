@@ -1,5 +1,5 @@
 class VehicleTwoA {
-    constructor(x, y, rotation, imageURL, width, height, rotationLimit, temperature) {
+    constructor(x, y, rotation, imageURL, width, height, rotationLimit, name) {
         this.x = x || windowWidth / 2;
         this.y = y || windowHeight / 2;
         this.position = createVector(x, y);
@@ -13,7 +13,7 @@ class VehicleTwoA {
         this.size = createVector(40, 20);
         // this.magnitude = 1000;
         this.rotationLimit = rotationLimit || 0.05;
-        this.temperature = temperature || 10;
+        this.name = name || "2A";
         this.editing = false;
     }
 
@@ -98,6 +98,14 @@ class VehicleTwoA {
         this.rightMotor.position.set(this.position.copy().add(p5.Vector.fromAngle(this.rotation + HALF_PI).setMag(15)));
         this.leftMotor.draw();
         this.rightMotor.draw();
+        this.drawName();
+    }
+
+    drawName() {
+        push()
+        stroke("red")
+        text(this.name, this.position.x, this.position.y);
+        pop()
     }
 
     run() {
@@ -115,6 +123,7 @@ class VehicleTwoA {
 class VehicleTwoB extends VehicleTwoA {
     constructor(x, y) {
         super(x, y);
+        this.name = "2B"
     }
     decide() {
         var thrust = this.sense();
@@ -137,6 +146,7 @@ class VehicleOne extends VehicleTwoA {
         super(x, y)
         this.motor = new Motor(this, createVector(0, 0), "red");
         this.rotation = rotation;
+        this.name = "1"
     }
 
     sense() {
@@ -166,6 +176,20 @@ class VehicleOne extends VehicleTwoA {
         pop();
         this.motor.position.set(this.position.copy().add(p5.Vector.fromAngle(this.rotation - HALF_PI).setMag(0)));
         this.motor.draw();
+        this.drawName();
     }
 
+}
+
+class VehicleTwoC extends VehicleTwoA {
+    constructor(x, y, rotation) {
+        super(x, y, rotation);
+        this.name = "2C";
+    }
+    decide() {
+        var thrust = this.sense();
+        var movement = p5.Vector.fromAngle(this.rotation)
+        movement.setMag(thrust);
+        return movement;
+    }
 }

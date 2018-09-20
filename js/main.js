@@ -17,6 +17,10 @@ function setup() {
     vehicles.push(new VehicleTwoA(500, 500));
     vehicles.push(new VehicleTwoB(600, 600));
     vehicles.push(new VehicleOne(700, 700, 4));
+    vehicles.push(new VehicleTwoC(700, 700, 4));
+    vehicles.push(new VehicleTwoC(700, 300, 3));
+    vehicles.push(new VehicleTwoC(700, 200, 1));
+    vehicles.push(new VehicleTwoC(700, 100, 0));
     // heatSources.push(new Sun(200, 200));
     createCanvas(windowWidth, windowHeight);
     // button = createButton('pause');
